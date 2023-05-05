@@ -6,8 +6,10 @@ import java.util.Map;
 
 import io.shmilyhe.utils.encryption.HMAC;
 import io.shmilyhe.utils.encryption.Hash;
+import io.shmilyhe.utils.encryption.ISignature;
 import io.shmilyhe.utils.encryption.Sha256;
 import io.shmilyhe.utils.encryption.Sha512;
+import io.shmilyhe.utils.encryption.SignatureFactory;
 
 /**
  * JWT 实现，目前只实现了HS256,HS512
@@ -75,7 +77,9 @@ public class JWT {
 
     public boolean check(String key){
         if(headString==null||payloadString==null||sign==null)return false;
-        return sign.equals(sign(key,headString,payloadString,head));
+        //return sign.equals(sign(key,headString,payloadString,head));
+        ISignature sginser = SignatureFactory.getSignature(this.alg());
+        return sginser.verify(join(headString,".",payloadString), sign, key);
     }
 
 
@@ -118,10 +122,13 @@ public class JWT {
     }
 
     protected String sign(String key,String headString,String payloadString,Map<String,Object> head){
+        /*
         Hash hash =getHash(this.alg());
         HMAC hmac = new HMAC(key.getBytes(),hash);
         byte[] b= hmac.sum(join(headString,".",payloadString).getBytes(utf8));
-        return URL64.encode(b).replaceAll("=", "");
+        return URL64.encode(b).replaceAll("=", "");*/
+        ISignature sginser = SignatureFactory.getSignature(this.alg());
+        return sginser.sgin(join(headString,".",payloadString), key);
     }
 
     protected String join(String ...str){

@@ -49,14 +49,14 @@ public class URL64 {
                 buf.append(legalChars[(d >> 18) & 63]);  
                 buf.append(legalChars[(d >> 12) & 63]);  
                 buf.append(legalChars[(d >> 6) & 63]);  
-                buf.append(legalChars[64]);  
+                //buf.append(legalChars[64]);  
             } else if (i == start + len - 1) {  
                 int d = (((int) data[i]) & 0x0ff) << 16;  
   
                 buf.append(legalChars[(d >> 18) & 63]);  
                 buf.append(legalChars[(d >> 12) & 63]);  
-                buf.append(legalChars[64]); 
-                buf.append(legalChars[64]); 
+                //buf.append(legalChars[64]); 
+                //buf.append(legalChars[64]); 
             }  
   
             return buf.toString();  
