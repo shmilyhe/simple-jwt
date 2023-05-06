@@ -4,7 +4,7 @@
 
 	<groupId>io.github.shmilyhe</groupId>
 	<artifactId>simple-jwt</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	<description>simple-jwt</description>
 	<name>io.github.shmilyhe:uas-core</name>
